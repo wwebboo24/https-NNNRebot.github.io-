@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NNN Reboot Card — Luxe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#0b0f17;
+      --ink-2:#111726;
+      --gold:#f0c674;
+      --gold-2:#e7b661;
+      --gold-soft:#ffe7b0;
+      --text:#f5f7fb;
+      --muted:#b6c0d4;
+      --blue:#4ea3ff;
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.08);
+      --glass-border: rgba(255,255,255,0.16);
+      --shadow: 0 22px 60px rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(240,198,116,0.10), transparent 60%),
+        radial-gradient(900px 500px at 10% 110%, rgba(255,255,255,0.06), transparent 60%),
+        linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+      overflow-x:hidden;
+    }
+    .sheen{
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      background: linear-gradient(75deg, transparent 40%, rgba(255,255,255,0.07) 50%, transparent 60%);
+      transform: translateX(-120%);
+      animation: sweep 12s linear infinite;
+    }
+    @keyframes sweep{ 0%{ transform: translateX(-120%) } 100%{ transform: translateX(120%) } }
+
+    header.hero{ position:relative; z-index:1; display:block; overflow:hidden; }
+    .hero-img{
+      width:100%; height:56vh; min-height:360px; object-fit:cover; display:block;
+      filter: saturate(1.05) contrast(1.05) brightness(0.93);
+    }
+    .hero-reflect{ height:120px; overflow:hidden; position:relative; }
+    .hero-reflect img{
+      width:100%; height:120px; object-fit:cover;
+      transform: scaleY(-1);
+      opacity:.35; filter: blur(2px); mix-blend-mode:screen;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,0));
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,0));
+    }
+    .title-wrap{
+      position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding:24px;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.45) 100%);
+    }
+    .title{
+      font-family: "Playfair Display", serif;
+      font-weight:800; font-size: clamp(28px, 6vw, 64px);
+      letter-spacing:.3px; text-align:center; color: var(--gold-soft);
+      text-shadow: 0 10px 30px rgba(0,0,0,.6);
+    }
+    main{ position:relative; z-index:1; }
+
+    section{
+      min-height:90vh;
+      display:flex; align-items:center; justify-content:center;
+      padding: clamp(22px, 6vw, 64px);
+      text-align:center;
+    }
+    .card{
+      width:min(980px, 92vw);
+      padding: clamp(20px, 4vw, 48px);
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    h1,h2{ margin:0 0 10px; }
+    h1{
+      font-family: "Playfair Display", serif;
+      font-weight: 800;
+      color: var(--gold);
+      font-size: clamp(26px, 4.8vw, 44px);
+      letter-spacing:.2px;
+    }
+    h2{
+      font-family: "Playfair Display", serif;
+      font-weight: 800;
+      color: var(--gold);
+      font-size: clamp(22px, 3.6vw, 36px);
+      letter-spacing:.2px;
+    }
+    p.lead{
+      margin: 0 auto 18px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(16px, 2.3vw, 20px);
+      line-height:1.65;
+    }
+
+    .scroll{
+      position: relative;
+      margin: 14px auto 0;
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 10px 16px; border-radius:999px;
+      border:1px solid var(--glass-border);
+      background: rgba(255,255,255,0.05);
+      text-decoration:none; color:var(--text);
+      transition: transform .2s ease, background .2s ease;
+    }
+    .scroll:hover{ transform: translateY(1px); background: rgba(255,255,255,0.07); }
+    .chev{ opacity:.7 }
+
+    .img-wrap{ display:flex; align-items:center; justify-content:center; }
+    .reboot-img{
+      width: min(440px, 75vw); height:auto; display:block;
+      filter: drop-shadow(0 18px 32px rgba(0,0,0,.45));
+      transition: transform .18s ease, filter .18s ease;
+      cursor: pointer; user-select:none;
+    }
+    .reboot-img:active{ transform: scale(0.98); filter: drop-shadow(0 10px 18px rgba(0,0,0,.5)); }
+
+    .cta-grid{
+      margin-top: 28px;
+      display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap:16px;
+    }
+    .cta{
+      padding:18px 20px; border-radius:18px;
+      background: var(--glass-2);
+      border:1px solid var(--glass-border);
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      font-weight:700; letter-spacing:.2px;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      text-decoration:none; color:var(--text);
+      user-select:none;
+    }
+    .cta:hover{ transform: translateY(2px); background: rgba(255,255,255,0.10); box-shadow: 0 10px 22px rgba(0,0,0,.35); }
+    .cta .badge{ font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--glass-border); opacity:.85 }
+    .cta.x .badge{ border-color: rgba(78,163,255,.5) }
+    .cta.token .badge{ border-color: rgba(240,198,116,.5) }
+    .cta .label{ font-size:16px; letter-spacing:.3px }
+
+    footer.small{
+      margin-top: 18px;
+      opacity:.65; color: var(--muted); font-size: 14px;
+    }
+
+    ul.examples{
+      list-style: none; padding:0; margin: 16px auto 0; max-width: 820px; text-align:left;
+    }
+    ul.examples li{
+      margin: 10px 0; padding:12px 14px; border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      line-height:1.55; color: var(--text);
+    }
+    ul.examples li span{ color: var(--gold-2); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="sheen" aria-hidden="true"></div>
+
+  <header class="hero">
+    <img class="hero-img" src="banner-top.jpg" alt="NNN Banner">
+    <div class="title-wrap">
+      <div class="title">This is your NNN Reboot Card</div>
+    </div>
+    <div class="hero-reflect"><img src="banner-top.jpg" alt=""></div>
+  </header>
+
+  <main>
+    <section id="intro">
+      <div class="card">
+        <h2>Everybody deserves a second chance, use it wisely!</h2>
+        <p class="lead">Scroll to access your reboot card and quick actions. Reset the streak, reset the mindset.</p>
+        <a class="scroll" href="#reboot">Scroll down <span class="chev">↓</span></a>
+      </div>
+    </section>
+
+    <section id="reboot">
+      <div class="card">
+        <div class="img-wrap">
+          <img src="reboot-card.png" alt="NNN Reboot Card" class="reboot-img" />
+        </div>
+
+        <div class="cta-grid" style="margin-top:26px">
+          <a class="cta x" href="https://x.com/i/communities/1971387727947104618" target="_blank" rel="noopener">
+            <span class="badge">X</span>
+            <span class="label">X Community</span>
+          </a>
+          <div class="cta token" role="button" tabindex="0" aria-label="Token (coming soon)">
+            <span class="badge">⏳</span>
+            <span class="label">Token (coming soon)</span>
+          </div>
+        </div>
+
+        <footer class="small">Made with discipline 💪</footer>
+      </div>
+    </section>
+
+    <section id="ideas">
+      <div class="card">
+        <h2>Ideas to make this page more interesting</h2>
+        <p class="lead">Mix a little accountability with encouragement. Here are quick, optional blocks you can add later:</p>
+        <ul class="examples">
+          <li><span>Daily Pledge:</span> “No excuses. I choose focus today.” (Tap to timestamp + save locally)</li>
+          <li><span>Reset Log:</span> Last reboot: <em>not set</em>. (Show date/time of last click)</li>
+          <li><span>Micro‑Wins:</span> 10 pushups • 5 min walk • 1 glass of water (tap to check off)</li>
+          <li><span>Emergency Plan:</span> “When urge hits → phone down → cold water → 10 breaths → text a friend.”</li>
+          <li><span>Why Reboot:</span> Short prompt: “What are you rebuilding this month?” (1‑line input saved locally)</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
